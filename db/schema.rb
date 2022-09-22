@@ -10,9 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_09_22_031641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "companies", primary_key: "company_code", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lines", primary_key: "line_code", id: :serial, force: :cascade do |t|
+    t.integer "company_code", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lines_stations", force: :cascade do |t|
+    t.integer "line_code", null: false
+    t.integer "station_code", null: false
+    t.integer "order", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["line_code", "station_code"], name: "index_lines_stations_on_line_code_and_station_code", unique: true
+  end
+
+  create_table "stations", primary_key: "station_code", id: :serial, force: :cascade do |t|
+    t.integer "company_code", null: false
+    t.string "name", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "lines", "companies", column: "company_code", primary_key: "company_code"
+  add_foreign_key "lines_stations", "lines", column: "line_code", primary_key: "line_code"
+  add_foreign_key "lines_stations", "stations", column: "station_code", primary_key: "station_code"
+  add_foreign_key "stations", "companies", column: "company_code", primary_key: "company_code"
 end
