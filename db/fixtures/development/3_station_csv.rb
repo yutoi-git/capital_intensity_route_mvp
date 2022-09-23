@@ -8,6 +8,8 @@ csv.each do |line|
   name = line[2]
   longitude = line[3]
   latitude = line[4]
+  lower_six = line[5]
+  upper_six = line[6]
 
   Station.seed(:station_code) do |s|
     s.station_code = station_code
@@ -15,5 +17,7 @@ csv.each do |line|
     s.name = name
     s.longitude = longitude
     s.latitude = latitude
+    s.lower_six = lower_six
+    s.upper_six = upper_six
   end
 end
