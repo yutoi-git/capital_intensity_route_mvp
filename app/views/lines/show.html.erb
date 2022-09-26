@@ -1,0 +1,13 @@
+<br>
+<% @line.each do |l| %>
+  <%= link_to "#{l.name}", "/#{l.line_code}" %><br>
+<% end %>
+<br>
+<%= @params_line.name %>
+<br><br>
+<% @line_station.each do |ls| %>
+  <%= ls.name %>
+  <%= (ls.lower_six * 100).round(0) %>
+  <%= (ls.upper_six * 100).round(0) %>
+  <br>
+<% end %>
