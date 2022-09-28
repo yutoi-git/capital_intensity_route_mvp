@@ -81,6 +81,9 @@ test:
 #
 production:
   <<: *default
-  database: capital_intensity_route_mvp_production
-  username: capital_intensity_route_mvp
-  password: <%= ENV['CAPITAL_INTENSITY_ROUTE_MVP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  #database: capital_intensity_route_mvp_production
+  #username: capital_intensity_route_mvp
+  #password: <%= ENV['CAPITAL_INTENSITY_ROUTE_MVP_DATABASE_PASSWORD'] %>
