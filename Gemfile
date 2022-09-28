@@ -33,6 +33,10 @@ gem 'bootstrap'
 # Create database
  gem 'seed-fu'
 
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -52,10 +56,6 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require:false
   gem 'solargraph', require: false
-
-  gem 'net-smtp'
-  gem 'net-imap'
-  gem 'net-pop'
 
 end
 
