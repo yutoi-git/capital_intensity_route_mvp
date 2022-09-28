@@ -1,13 +1,53 @@
-<br>
-<% @line.each do |l| %>
-  <%= link_to "#{l.name}", "/#{l.line_code}" %><br>
-<% end %>
-<br>
-<%= @params_line.name %>
-<br><br>
-<% @line_station.each do |ls| %>
-  <%= ls.name %>
-  <%= (ls.lower_six * 100).round(0) %>
-  <%= (ls.upper_six * 100).round(0) %>
-  <br>
-<% end %>
+<div class="row">
+  <div class="col-md-2">
+    <div class="d-flex flex-column px-3 py-5 bg-light h-100">
+      <% @line.each do |l| %>
+        <div class="nav-link">
+          <%= link_to "#{l.name}", "/#{l.line_code}" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="mx-5">
+      <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1><%= @params_line.name %></h1>
+        <p><%= @params_line.name %>の駅に位置する地点が、30年以内に震度６弱・震度６強以上の揺れに見舞われる確率を示しています。</p>
+      </div>
+
+      <div class="text-center">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">駅名</th>
+              <th scope="col">震度６弱 発生確率</th>
+              <th scope="col">震度６強 発生確率</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @line_station.each do |ls| %>
+              <tr>
+                <td><%= ls.name %></td>
+                <td>
+                  <div class="progress-bar <%= ls.lower_six >= 0.508 ? "bg-danger" : "bg-warning" %>" style="width: <%= ls.lower_six * 100 %>%;">
+                    <%= (ls.lower_six * 100).round(0) %>
+                  </div>
+                </td>
+                <td>
+                  <div class="progress-bar <%= ls.upper_six >= 0.098 ? "bg-danger" : "bg-warning" %>" style="width: <%= ls.upper_six * 100 %>%;">
+                    <%= (ls.upper_six * 100).round(0) %>
+                  </div>
+                </td>
+                <td><%= link_to "目的地まで", "#" %></td>
+                <td><%= link_to "☆", "#" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
