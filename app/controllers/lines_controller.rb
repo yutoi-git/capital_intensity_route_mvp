@@ -1,4 +1,8 @@
 class LinesController < ApplicationController
+  def index
+    redirect_to "/11302"
+  end
+
   def show
     @line = Line.all
     @params_line = Line.find(params[:line_code])
