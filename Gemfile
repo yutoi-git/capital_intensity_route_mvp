@@ -30,8 +30,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'bootstrap'
 
+gem 'sorcery'
+
 # Create database
- gem 'seed-fu'
+gem 'seed-fu'
 
 gem 'net-smtp'
 gem 'net-imap'
