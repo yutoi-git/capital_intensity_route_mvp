@@ -1,0 +1,9 @@
+<div class="col-md-2">
+  <div class="d-flex flex-column px-3 py-5 bg-light h-100">
+    <% @line.each do |l| %>
+      <div class="nav-link">
+        <%= link_to "#{l.name}", "/#{l.line_code}" %>
+      </div>
+    <% end %>
+  </div>
+</div>

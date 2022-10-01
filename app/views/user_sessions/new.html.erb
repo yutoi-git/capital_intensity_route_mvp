@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="wrapper">
+    <h1 class="h3 my-4 text-center">ユーザーログイン</h1>
+
+    <%= form_with url: login_path, local: true do |f| %>
+      <%= f.label 'メールアドレス' %><br/>
+      <%= f.text_field :email, class: 'form-control mb-3' %>
+      <%= f.label 'パスワード' %><br/>
+      <%= f.password_field :password, class: 'form-control mb-3' %>
+      <div class="text-center">
+        <%= f.submit 'ログインする', class: 'btn btn-primary mb-3' %>
+      </div>
+    <% end %> 
+  </div>
+</div>
