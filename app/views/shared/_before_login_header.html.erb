@@ -1,0 +1,20 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #13BF00;">
+    <div class="container-fluid">
+      <%= link_to '首都圏震度路線図', root_path, class: 'navbar-brand' %>
+      <div class="navbar-collapse justify-content-end">
+        <ul class="navbar-nav nav ms-auto">
+          <li class="nav-item  mx-2">
+            <%= button_to 'お試しで使う', guest_login_path, class: 'btn btn-light' %>
+          </li>
+          <li class="nav-item  mx-2">
+            <%= button_to '新規登録', new_user_path, method: :get, class: 'btn btn-light' %>
+          </li>
+          <li class="nav-item  mx-2">
+            <%= button_to 'ログイン', login_path, method: :get, class: 'btn btn-light' %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
