@@ -1,0 +1,61 @@
+<div class="row">
+  <%= render 'shared/sidebar' %>
+
+  <div class="col-md-10">
+    <div class="mx-5">
+      <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1>ブックマーク一覧</h1>
+      </div>
+
+      <div class="text-center">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">駅名</th>
+              <th scope="col">震度６弱 発生確率</th>
+              <th scope="col">震度６強 発生確率</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bookmark_station.each do |bs| %>
+              <tr>
+                <td><%= bs.name %></td>
+                <td>
+                  <div class="progress-bar <%= bs.lower_six >= 0.508 ? "bg-danger" : "bg-warning" %>" style="width: <%= bs.lower_six * 100 %>%;">
+                    <%= (bs.lower_six * 100).round(0) %>
+                  </div>
+                </td>
+                <td>
+                  <div class="progress-bar <%= bs.upper_six >= 0.098 ? "bg-danger" : "bg-warning" %>" style="width: <%= bs.upper_six * 100 %>%;">
+                    <%= (bs.upper_six * 100).round(0) %>
+                  </div>
+                </td>
+                <td><%= link_to "目的地まで", "#" %></td>
+                <% if current_user %>
+                  <% if current_user.already_bookmark?(bs) %>
+                    <td>
+                      <%= link_to station_bookmarks_path(bs.station_code), method: :delete do %>
+                        <%= icon 'fas', 'star' %>
+                      <% end %>
+                    </td>
+                  <% else %>
+                    <td>
+                      <%= link_to station_bookmarks_path(bs.station_code), method: :post do %>
+                        <%= icon 'far', 'star' %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                <% else %>
+                  <td><%= link_to "☆", new_user_path %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

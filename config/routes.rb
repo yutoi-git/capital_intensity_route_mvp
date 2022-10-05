@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   post 'guest_login', to: 'user_sessions#guest_login'
 
   resources :users, only: %i[new create]
-  get '/:line_code', to: 'lines#show'
+
+  get '/bookmarks', to: 'stations#bookmark'
+  get '/:code', to: 'stations#index'
+
+  resources :stations do
+    resource :bookmarks, only: [:create, :destroy], param: :station_code
+  end
 end

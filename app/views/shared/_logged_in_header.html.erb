@@ -7,7 +7,7 @@
           <li class="nav-item  mx-2">
             <%= button_to '目的地設定', "#", method: :get, class: 'btn btn-light' %>
           <li class="nav-item  mx-2">
-            <%= button_to 'ブックマーク一覧', "#", method: :get, class: 'btn btn-light' %>
+            <%= button_to 'ブックマーク一覧', bookmarks_path, method: :get, class: 'btn btn-light' %>
           </li>
           <li class="nav-item  mx-2">
             <%= button_to 'ログアウト', logout_path, method: :delete, class: 'btn btn-light' %>

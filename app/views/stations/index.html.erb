@@ -34,7 +34,27 @@
                   </div>
                 </td>
                 <td><%= link_to "目的地まで", "#" %></td>
-                <td><%= link_to "☆", "#" %></td>
+                <% if current_user %>
+                  <% if current_user.already_bookmark?(ls) %>
+                    <td>
+                      <%= link_to station_bookmarks_path(ls.station_code), method: :delete do %>
+                        <%= icon 'fas', 'star' %>
+                      <% end %>
+                    </td>
+                  <% else %>
+                    <td>
+                      <%= link_to station_bookmarks_path(ls.station_code), method: :post do %>
+                        <%= icon 'far', 'star' %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                <% else %>
+                  <td>
+                    <%= link_to new_user_path do %>
+                      <%= icon 'far', 'star' %>
+                    <% end %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
