@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_30_043939) do
+ActiveRecord::Schema.define(version: 2022_10_01_124336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "station_code", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "station_code"], name: "index_bookmarks_on_user_id_and_station_code", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
 
   create_table "companies", primary_key: "company_code", id: :serial, force: :cascade do |t|
     t.string "name", null: false
@@ -57,6 +66,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_043939) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "bookmarks", "stations", column: "station_code", primary_key: "station_code"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "lines", "companies", column: "company_code", primary_key: "company_code"
   add_foreign_key "lines_stations", "lines", column: "line_code", primary_key: "line_code"
   add_foreign_key "lines_stations", "stations", column: "station_code", primary_key: "station_code"
